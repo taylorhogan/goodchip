@@ -11,3 +11,6 @@ This directory contains two sets of a data.
 - A file that contains a list of filenames along with a label that represents the percentage of crossings
 
 The goal is to write a model that predicts the crossing percentage from the picture. 
+The pictures are generated via a python script but statistically look like real chips. After the model is developed that demonstrates good correlation, more images can be generated.
+It would be interesting to see how the correlation changes with the number of images in the training set.
+If time permits 2 models could be trained on different image sets. If the two models match in prediction, then the confidence is high, otherwised the confidence is low in the prediction.
