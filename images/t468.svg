@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="10000" height="10000" viewBox="0 0 10000 10000">
+<defs>
+</defs>
+<path d="M2706,1681 L2912,1954" stroke="blue" stroke-width="2" />
+<path d="M3625,2580 L6203,32" stroke="blue" stroke-width="2" />
+<path d="M5280,4614 L3485,113" stroke="blue" stroke-width="2" />
+<path d="M2960,1033 L5320,3438" stroke="blue" stroke-width="2" />
+<path d="M5632,3447 L1557,3621" stroke="blue" stroke-width="2" />
+<path d="M515,4104 L130,3820" stroke="blue" stroke-width="2" />
+<path d="M6773,4170 L4264,3873" stroke="blue" stroke-width="2" />
+<path d="M5627,2483 L3613,3710" stroke="blue" stroke-width="2" />
+<path d="M3773,5342 L3447,1943" stroke="blue" stroke-width="2" />
+<path d="M5722,4062 L4841,2006" stroke="blue" stroke-width="2" />
+<path d="M4819,4719 L447,1902" stroke="blue" stroke-width="2" />
+<path d="M4377,3774 L1024,110" stroke="blue" stroke-width="2" />
+<path d="M0,0 L6888,0" stroke="red" stroke-width="10" />
+<path d="M6888,0 L6888,5364" stroke="red" stroke-width="10" />
+<path d="M0,5364 L6888,5364" stroke="red" stroke-width="10" />
+<path d="M0,5364 L0,0" stroke="red" stroke-width="10" />
+</svg>

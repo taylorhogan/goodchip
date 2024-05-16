@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="10000" height="10000" viewBox="0 0 10000 10000">
+<defs>
+</defs>
+<path d="M4578,4008 L7731,109" stroke="blue" stroke-width="2" />
+<path d="M0,0 L9208,0" stroke="red" stroke-width="10" />
+<path d="M9208,0 L9208,8210" stroke="red" stroke-width="10" />
+<path d="M0,8210 L9208,8210" stroke="red" stroke-width="10" />
+<path d="M0,8210 L0,0" stroke="red" stroke-width="10" />
+</svg>

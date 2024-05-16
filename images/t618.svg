@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="10000" height="10000" viewBox="0 0 10000 10000">
+<defs>
+</defs>
+<path d="M2307,2767 L732,925" stroke="blue" stroke-width="2" />
+<path d="M737,606 L843,3198" stroke="blue" stroke-width="2" />
+<path d="M2405,5562 L1341,2551" stroke="blue" stroke-width="2" />
+<path d="M1861,1727 L1062,1313" stroke="blue" stroke-width="2" />
+<path d="M2020,1791 L3280,4996" stroke="blue" stroke-width="2" />
+<path d="M3024,8 L3422,5591" stroke="blue" stroke-width="2" />
+<path d="M1136,1547 L400,92" stroke="blue" stroke-width="2" />
+<path d="M168,3298 L3506,2225" stroke="blue" stroke-width="2" />
+<path d="M2020,5058 L2976,2928" stroke="blue" stroke-width="2" />
+<path d="M2934,5455 L2406,5088" stroke="blue" stroke-width="2" />
+<path d="M2298,2528 L3345,5539" stroke="blue" stroke-width="2" />
+<path d="M1661,3303 L3343,5487" stroke="blue" stroke-width="2" />
+<path d="M2167,2778 L635,3064" stroke="blue" stroke-width="2" />
+<path d="M455,3498 L3454,4570" stroke="blue" stroke-width="2" />
+<path d="M2315,5846 L2894,981" stroke="blue" stroke-width="2" />
+<path d="M2311,329 L429,2389" stroke="blue" stroke-width="2" />
+<path d="M1632,5226 L460,4464" stroke="blue" stroke-width="2" />
+<path d="M2294,5265 L59,1545" stroke="blue" stroke-width="2" />
+<path d="M3709,1346 L495,997" stroke="blue" stroke-width="2" />
+<path d="M1891,716 L1269,2677" stroke="blue" stroke-width="2" />
+<path d="M3013,1268 L3097,5066" stroke="blue" stroke-width="2" />
+<path d="M2360,3137 L1286,3107" stroke="blue" stroke-width="2" />
+<path d="M3524,4064 L2885,1940" stroke="blue" stroke-width="2" />
+<path d="M0,0 L3797,0" stroke="red" stroke-width="10" />
+<path d="M3797,0 L3797,5892" stroke="red" stroke-width="10" />
+<path d="M0,5892 L3797,5892" stroke="red" stroke-width="10" />
+<path d="M0,5892 L0,0" stroke="red" stroke-width="10" />
+</svg>
