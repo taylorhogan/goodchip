@@ -1,3 +1,4 @@
+import math
 import os
 import random
 
@@ -7,7 +8,7 @@ import numpy as np
 import db
 import geom as g
 
-max_components = 10
+max_components = 1000
 num_designs = 3
 component_ds = 32
 pin_ds = 8
@@ -68,14 +69,14 @@ def draw_component(display, component):
 
 def draw_net(display, db):
     for c in db.connections:
-        l = draw.Line(c.line.xy[0][0], c.line.xy[0][1], c.line.xy[1][0], c.line.xy[1][1], stroke='black',
+        l = draw.Line(c.line.xy[0][0], c.line.xy[1][0], c.line.xy[0][1], c.line.xy[1][1], stroke='black',
                       stroke_width=1)
         display.append(l)
 
 
 def draw_db(display, db):
     r = db.die.rect
-    outline = draw.Rectangle(r.ll.x, r.ll.y, r.width(), r.height(), fill='green')
+    outline = draw.Rectangle(r.ll.x, r.ll.y, r.width(), r.height(), fill='blue')
     display.append(outline)
     for c in db.devices:
         draw_component(display, c)
@@ -85,29 +86,30 @@ def draw_db(display, db):
 def create_connections(a_db):
     die = a_db.die
     for n in die.nets:
-        pin_list = list()
+        component_pin_list = list()
         for c in die.children:
             for net_on_component in c.parent_net_map:
                 if n == net_on_component:
                     pin = c.parent_net_map.get(net_on_component)
-                    pin_list.append((c, pin))
-        for pin_idx in range(len(pin_list) - 1):
-            from_pin = pin_list[pin_idx]
-            to_pin = pin_list[pin_idx + 1]
+                    component_pin_list.append((c, pin))
+        for pin_idx in range(len(component_pin_list) - 1):
+            from_pin = component_pin_list[pin_idx]
+            to_pin = component_pin_list[pin_idx + 1]
 
             connection = db.Connection(from_pin[0], to_pin[0], from_pin[1], to_pin[1])
             a_db.add_connection(connection)
 
 
 def lattice_generator():
-    num_columns = random.randint(1, max_components)
-    num_rows = random.randint(1, max_components)
+    num_columns = random.randint(1, math.ceil(math.sqrt(max_components)))
+    num_rows = random.randint(1, math.ceil(math.sqrt(max_components)))
 
     # draw the design bounds
     num_components = num_columns * num_rows
     max_x = (num_columns * component_ds * 2) + component_ds
     max_y = (num_rows * component_ds * 2) + component_ds
     seq = np.random.permutation(num_components)
+
     drawing = draw.Drawing(max_x, max_y)
     ll = g.XY(0, 0)
     ur = g.XY(max_x, max_y)
@@ -133,7 +135,7 @@ def lattice_generator():
     # create nets
 
     net_num = 0
-    for idx in range(num_components - 2):
+    for idx in range(num_components - 1):
         row, col = row_col_from_index(idx, num_columns, num_rows)
         this_component = component_array[idx]
         if col == num_columns - 1:
