@@ -103,7 +103,7 @@ def create_connections(a_db):
             a_db.add_connection(connection)
 
 
-def lattice_generator():
+def lattice_generator() ->(db.DB, draw.Drawing):
     num_columns = random.randint(1, math.ceil(math.sqrt(max_components)))
     num_rows = random.randint(1, math.ceil(math.sqrt(max_components)))
 
@@ -175,14 +175,14 @@ class Label:
         self.score = score
 
 
-def create_lines(a_db):
+def create_lines(a_db) -> list():
     l = list()
     for c in a_db.connections:
         l.append(c.line)
     return l
 
 
-def determine_score(a_db):
+def determine_score(a_db) -> float:
     total, crosses = g.det_crosses(create_lines(a_db))
     score = crosses / total
     return score
