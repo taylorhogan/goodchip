@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="288" height="96" viewBox="0 0 288 96">
+<defs>
+</defs>
+<rect x="0" y="0" width="288" height="96" fill="blue" />
+<rect x="160" y="32" width="32" height="32" fill="white" />
+<rect x="172.0" y="60.0" width="8.0" height="8.0" fill="red" />
+<rect x="188.0" y="44.0" width="8.0" height="8.0" fill="red" />
+<rect x="172.0" y="28.0" width="8.0" height="8.0" fill="red" />
+<rect x="156.0" y="44.0" width="8.0" height="8.0" fill="red" />
+<rect x="32" y="32" width="32" height="32" fill="white" />
+<rect x="44.0" y="60.0" width="8.0" height="8.0" fill="red" />
+<rect x="60.0" y="44.0" width="8.0" height="8.0" fill="red" />
+<rect x="44.0" y="28.0" width="8.0" height="8.0" fill="red" />
+<rect x="28.0" y="44.0" width="8.0" height="8.0" fill="red" />
+<rect x="96" y="32" width="32" height="32" fill="white" />
+<rect x="108.0" y="60.0" width="8.0" height="8.0" fill="red" />
+<rect x="124.0" y="44.0" width="8.0" height="8.0" fill="red" />
+<rect x="108.0" y="28.0" width="8.0" height="8.0" fill="red" />
+<rect x="92.0" y="44.0" width="8.0" height="8.0" fill="red" />
+<rect x="224" y="32" width="32" height="32" fill="white" />
+<rect x="236.0" y="60.0" width="8.0" height="8.0" fill="red" />
+<rect x="252.0" y="44.0" width="8.0" height="8.0" fill="red" />
+<rect x="236.0" y="28.0" width="8.0" height="8.0" fill="red" />
+<rect x="220.0" y="44.0" width="8.0" height="8.0" fill="red" />
+<path d="M192.0,48.0 L32.0,48.0" stroke="black" stroke-width="1" />
+<path d="M64.0,48.0 L96.0,48.0" stroke="black" stroke-width="1" />
+<path d="M128.0,48.0 L224.0,48.0" stroke="black" stroke-width="1" />
+</svg>
