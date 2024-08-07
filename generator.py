@@ -5,23 +5,26 @@ import random
 import drawsvg as draw
 import numpy as np
 
+import config
 import db
 import geom as g
 
-max_components = 1000
-num_designs = 3
-component_ds = 32
-pin_ds = 8
+cfg = config.Config()
+
+max_components = cfg.get_max_components()
+num_designs = cfg.get_num_designs()
+component_ds = cfg.get_component_ds()
+pin_ds = cfg.get_pin_ds()
 
 
-def row_col_from_index(index, dx, dy):
+def row_col_from_index(index, dx, dy) -> (int, int):
     row = index // dx
     col = index % dx
 
     return row, col
 
 
-def create_basic_macro(a_db):
+def create_basic_macro(a_db) -> db.Macro:
     w = component_ds
     h = component_ds
 
@@ -38,7 +41,7 @@ def create_basic_macro(a_db):
     return macro
 
 
-def create_db(world_bounds):
+def create_db(world_bounds) -> db.DB:
     # Create Top Level Macro
     newdb = db.DB("db")
     design = db.Macro("Design", None, world_bounds, None)
@@ -48,18 +51,18 @@ def create_db(world_bounds):
     return newdb
 
 
-def create_cell(newdb):
+def create_cell(newdb) -> db.Macro:
     cell = create_basic_macro(newdb)
 
     return cell
 
 
-def draw_geometry(display, r, color):
+def draw_geometry(display, r, color) -> None:
     outline = draw.Rectangle(r.ll.x, r.ll.y, r.width(), r.height(), fill=color)
     display.append(outline)
 
 
-def draw_component(display, component):
+def draw_component(display, component) -> None:
     r = component.macro.rect.move_by(component.loc.x, component.loc.y)
     draw_geometry(display, r, "white")
     for p in component.macro.pins:
@@ -67,14 +70,14 @@ def draw_component(display, component):
         draw_geometry(display, r, "red")
 
 
-def draw_net(display, db):
+def draw_net(display, db) -> None:
     for c in db.connections:
         l = draw.Line(c.line.xy[0][0], c.line.xy[1][0], c.line.xy[0][1], c.line.xy[1][1], stroke='black',
                       stroke_width=1)
         display.append(l)
 
 
-def draw_db(display, db):
+def draw_db(display, db) -> None:
     r = db.die.rect
     outline = draw.Rectangle(r.ll.x, r.ll.y, r.width(), r.height(), fill='blue')
     display.append(outline)
