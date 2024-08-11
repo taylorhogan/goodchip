@@ -8,6 +8,13 @@ import numpy as np
 import config
 import db
 import geom as g
+import shapely
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from matplotlib.ticker import LinearLocator
+
+#TODO make a main, perhaps pass arguments in config.py
+
 
 cfg = config.Config()
 
@@ -103,7 +110,18 @@ def create_connections(a_db):
             a_db.add_connection(connection)
 
 
-def lattice_generator() ->(db.DB, draw.Drawing):
+def swap_contents (x )  :
+    size = len(x)-1
+    p0 = random.randint(1, size)
+    p1 = random.randint(1,size)
+    t = x[p0]
+    x[p0] = x[p1]
+    x[p1] = t
+    return x
+
+
+
+def lattice_generator(design_idx)->(db.DB, draw.Drawing):
     num_columns = random.randint(1, math.ceil(math.sqrt(max_components)))
     num_rows = random.randint(1, math.ceil(math.sqrt(max_components)))
 
@@ -111,7 +129,13 @@ def lattice_generator() ->(db.DB, draw.Drawing):
     num_components = num_columns * num_rows
     max_x = (num_columns * component_ds * 2) + component_ds
     max_y = (num_rows * component_ds * 2) + component_ds
-    seq = np.random.permutation(num_components)
+#    seq = np.random.permutation(num_components)
+    seq = np.r_[0:num_components:1]
+    if design_idx > 0:
+        num_permutes = random.randint(0, num_components)
+        for permmute_idx in range(num_permutes):
+            seq = swap_contents(seq)
+
 
     drawing = draw.Drawing(max_x, max_y)
     ll = g.XY(0, 0)
@@ -122,7 +146,7 @@ def lattice_generator() ->(db.DB, draw.Drawing):
     cell = create_cell(new_db)
     parent = new_db.die
 
-    component_array = np.full((num_components), None)
+    component_array = np.full(num_components, None)
 
     # draw the devices
     for idx in range(num_components):
@@ -202,7 +226,7 @@ def create_test_cases():
     labels = list()
     os.chdir("generated_images")
     for design_idx in range(num_designs):
-        a_db, drawing = lattice_generator()
+        a_db, drawing = lattice_generator(design_idx)
         filename = 't' + str(design_idx) + '.svg'
         draw_db(drawing, a_db)
         drawing.save_svg(filename)
@@ -211,5 +235,6 @@ def create_test_cases():
 
     create_label_files(labels)
 
+if __name__ == "__main__":
+    create_test_cases()
 
-create_test_cases()

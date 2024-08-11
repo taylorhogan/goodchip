@@ -2,7 +2,7 @@ class Config:
     def __init__ (self) -> None:
         self.params = {
             "max_components":100,
-            "num_designs": 1,
+            "num_designs": 10,
             "component_ds" : 32,
             "pin_ds": 8
         }
