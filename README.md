@@ -3,7 +3,8 @@
 ## Example training image
 ![connection image](html_images/t0.svg)
 
-There are billions of transistors in modern chips. It is the goal of the designer to make sure the connections between the transistors can be realized.
+# Real World Problem
+There are billions of transistors in modern chips. It is the goal of the designer to make sure the connections between the transistors can be realized. 
 One of the metrics leading to a "good chip" is to reduce the number of crossings of these connections. Other metrics leading to better connections are component 
 alignment, and distributed connection density. 
 One of the characteristics of Electronic Design Automation (EDA) that makes it ripe for ML is that it is a virtual world. 
@@ -22,9 +23,9 @@ If time permits 2 models could be trained on different image sets. If the two mo
 otherwise the confidence is low in the prediction.
 ## Goals
 - Clone or Fork this repo. Insure you can build and run the generator
-- look at the generated image files and the associated labels.csv file. Visually try to understand teh components, pins and connections. Do you see
-- more intersections in files that have a higher score?
+- look at the generated image files and the associated labels.csv file. Visually try to understand teh components, pins and connections. Do you see more intersections in files that have a higher score?
 - Build an image to number CNN that uses the training data to predict the intersection score on novel data.
+- Build larger training sets, how does the accuracy change?
 ## Instructions on how to build your training data
 git clone https://github.com/taylorhogan/goodchip
 
