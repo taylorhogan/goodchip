@@ -1,7 +1,5 @@
 import copy
-
 import shapely
-
 
 class XY:
     def __init__(self, x, y):
@@ -36,6 +34,21 @@ class Rect:
 
     def center(self):
         return XY(self.ll.x + self.width() / 2, self.ll.y + self.height() / 2)
+
+    def left(self):
+        return self.ll.x
+
+    def bottom(self):
+        return self.ll.y
+
+    def right(self):
+        return self.ur.x
+
+    def top(self):
+        return self.ur.y
+
+    def to_shapely_box (self):
+        return shapely.box(self.left(), self.bottom(), self.right(), self.top())
 
 
 def det_crosses(lines):
