@@ -8,12 +8,8 @@ import numpy as np
 import config
 import db
 import geom as g
-import shapely
-import matplotlib.pyplot as plt
-from matplotlib import cm
-from matplotlib.ticker import LinearLocator
 
-#TODO make a main, perhaps pass arguments in config.py
+# TODO make a main, perhaps pass arguments in config.py
 
 
 cfg = config.Config()
@@ -110,18 +106,17 @@ def create_connections(a_db):
             a_db.add_connection(connection)
 
 
-def swap_contents (x )  :
-    size = len(x)-1
+def swap_contents(x):
+    size = len(x) - 1
     p0 = random.randint(1, size)
-    p1 = random.randint(1,size)
+    p1 = random.randint(1, size)
     t = x[p0]
     x[p0] = x[p1]
     x[p1] = t
     return x
 
 
-
-def lattice_generator(design_idx)->(db.DB, draw.Drawing):
+def lattice_generator(design_idx) -> (db.DB, draw.Drawing):
     num_columns = random.randint(1, math.ceil(math.sqrt(max_components)))
     num_rows = random.randint(1, math.ceil(math.sqrt(max_components)))
 
@@ -129,13 +124,12 @@ def lattice_generator(design_idx)->(db.DB, draw.Drawing):
     num_components = num_columns * num_rows
     max_x = (num_columns * component_ds * 2) + component_ds
     max_y = (num_rows * component_ds * 2) + component_ds
-#    seq = np.random.permutation(num_components)
+    #    seq = np.random.permutation(num_components)
     seq = np.r_[0:num_components:1]
     if design_idx > 0:
         num_permutes = random.randint(0, num_components)
         for permmute_idx in range(num_permutes):
             seq = swap_contents(seq)
-
 
     drawing = draw.Drawing(max_x, max_y)
     ll = g.XY(0, 0)
@@ -234,7 +228,8 @@ def create_test_cases():
         labels.append(Label(filename, score))
 
     create_label_files(labels)
+    print("Created " + str(num_designs) + " training images")
+
 
 if __name__ == "__main__":
     create_test_cases()
-

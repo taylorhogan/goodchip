@@ -24,8 +24,10 @@ otherwise the confidence is low in the prediction.
 ## Goals
 - Clone or Fork this repo. Insure you can build and run the generator
 - look at the generated image files and the associated labels.csv file. Visually try to understand teh components, pins and connections. Do you see more intersections in files that have a higher score?
+- Change the code to not generate a double number but a binary value that represents if the number > some predetermined value.
 - Build an image to number CNN that uses the training data to predict the intersection score on novel data.
 - Build larger training sets, how does the accuracy change?
+- The code is also capable of generating congestion. How might congestion be a better metric?
 ## Instructions on how to build your training data
 git clone https://github.com/taylorhogan/goodchip
 
