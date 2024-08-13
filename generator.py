@@ -9,9 +9,6 @@ import config
 import db
 import geom as g
 
-# TODO make a main, perhaps pass arguments in config.py
-
-
 cfg = config.Config()
 
 max_components = cfg.get_max_components()
@@ -73,20 +70,20 @@ def draw_component(display, component) -> None:
         draw_geometry(display, r, "red")
 
 
-def draw_net(display, db) -> None:
-    for c in db.connections:
-        l = draw.Line(c.line.xy[0][0], c.line.xy[1][0], c.line.xy[0][1], c.line.xy[1][1], stroke='black',
-                      stroke_width=1)
-        display.append(l)
+def draw_net(display, a_db) -> None:
+    for c in a_db.connections:
+        a_line = draw.Line(c.line.xy[0][0], c.line.xy[1][0], c.line.xy[0][1], c.line.xy[1][1], stroke='black',
+                           stroke_width=1)
+        display.append(a_line)
 
 
-def draw_db(display, db) -> None:
-    r = db.die.rect
+def draw_db(display, a_db) -> None:
+    r = a_db.die.rect
     outline = draw.Rectangle(r.ll.x, r.ll.y, r.width(), r.height(), fill='blue')
     display.append(outline)
-    for c in db.devices:
+    for c in a_db.devices:
         draw_component(display, c)
-    draw_net(display, db)
+    draw_net(display, a_db)
 
 
 def create_connections(a_db):
@@ -107,9 +104,9 @@ def create_connections(a_db):
 
 
 def swap_contents(x):
-    size = len(x) - 1
-    p0 = random.randint(1, size)
-    p1 = random.randint(1, size)
+    size = len(x)
+    p0 = random.randint(0, size - 1)
+    p1 = random.randint(0, size - 1)
     t = x[p0]
     x[p0] = x[p1]
     x[p1] = t
@@ -117,8 +114,11 @@ def swap_contents(x):
 
 
 def lattice_generator(design_idx) -> (db.DB, draw.Drawing):
-    num_columns = random.randint(1, math.ceil(math.sqrt(max_components)))
-    num_rows = random.randint(1, math.ceil(math.sqrt(max_components)))
+    if cfg.get_same_design_size():
+        num_columns = num_rows = int(math.sqrt(max_components))
+    else:
+        num_columns = random.randint(1, math.ceil(math.sqrt(max_components)))
+        num_rows = random.randint(1, math.ceil(math.sqrt(max_components)))
 
     # draw the design bounds
     num_components = num_columns * num_rows
@@ -127,8 +127,12 @@ def lattice_generator(design_idx) -> (db.DB, draw.Drawing):
     #    seq = np.random.permutation(num_components)
     seq = np.r_[0:num_components:1]
     if design_idx > 0:
-        num_permutes = random.randint(0, num_components)
-        for permmute_idx in range(num_permutes):
+        if cfg.get_random_changes():
+            num_permutes = random.randint(0, num_components)
+        else:
+            num_permutes = design_idx
+
+        for permute_idx in range(num_permutes):
             seq = swap_contents(seq)
 
     drawing = draw.Drawing(max_x, max_y)
@@ -140,7 +144,7 @@ def lattice_generator(design_idx) -> (db.DB, draw.Drawing):
     cell = create_cell(new_db)
     parent = new_db.die
 
-    component_array = np.full(num_components, None)
+    component_array = np.full(num_components, db.Component)
 
     # draw the devices
     for idx in range(num_components):
@@ -169,13 +173,13 @@ def lattice_generator(design_idx) -> (db.DB, draw.Drawing):
             above_component = component_array[idx + num_columns]
 
         # set the nets between adjacent pins
-        if right_component != None:
+        if right_component is not None:
             from_pin = this_component.macro.get_pin_by_name("E")
             to_pin = right_component.macro.get_pin_by_name("W")
             net = db.Net("net-" + str(net_num), this_component.parent)
             this_component.set_net(from_pin, net)
             right_component.set_net(to_pin, net)
-        if above_component != None:
+        if above_component is not None:
             from_pin = this_component.macro.get_pin_by_name("N")
             to_pin = above_component.macro.get_pin_by_name("S")
             net = db.Net("net-" + str(net_num), this_component.parent)
@@ -233,3 +237,4 @@ def create_test_cases():
 
 if __name__ == "__main__":
     create_test_cases()
+    print("Done")

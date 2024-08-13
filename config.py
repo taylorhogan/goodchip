@@ -1,13 +1,16 @@
 class Config:
-    def __init__ (self) -> None:
+    def __init__(self) -> None:
         self.params = {
-            "max_components":100,
+            "max_components": 100,
             "num_designs": 10,
-            "component_ds" : 32,
-            "pin_ds": 8
+            "component_ds": 32,
+            "pin_ds": 8,
+            "same_design_size": False,
+            "random_changes": True
+
         }
 
-    def get_max_components (self) -> int:
+    def get_max_components(self) -> int:
         return self.params["max_components"]
 
     def get_num_designs(self) -> int:
@@ -19,5 +22,8 @@ class Config:
     def get_pin_ds(self) -> int:
         return self.params["pin_ds"]
 
+    def get_same_design_size(self) -> bool:
+        return self.params["same_design_size"]
 
-
+    def get_random_changes(self) -> bool:
+        return self.params["random_changes"]
