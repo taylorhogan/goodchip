@@ -2,7 +2,8 @@
 ![chip image](html_images/chip.jpeg)
 ## Example training image
 ![connection image](html_images/t0.svg)
-
+## Potentially Congestion can be calculated as a fitness function
+![congestion_image](html_images/congestion.png)
 # Real World Problem
 There are billions of transistors in modern chips. It is the goal of the designer to make sure the connections between the transistors can be realized. 
 One of the metrics leading to a "good chip" is to reduce the number of crossings of these connections. Other metrics leading to better connections are component 
