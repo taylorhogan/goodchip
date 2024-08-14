@@ -1,17 +1,25 @@
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator
+import generator as g
+
 import numpy as np
 import shapely
 import generator
 import config
 
 # TODO this is a work in progress.
-def fun (x, y):
-    z = np.array
-    for row in x:
-        for col in y:
-            return 1
+def fun (x, y, z):
+    sum = 0;
+    for xidx in range (len(x)-1):
+        for yidx in range (len(y)-1):
+            xval = x[xidx][0]
+            yval = y[yidx][0]
+            zval = z[xidx][yidx]
+            z[xidx][yidx] = zval
+
+
+
 
 
 
@@ -25,6 +33,7 @@ def inject_c_in_congestion (z, l, r, rows, cols, dx, dy):
             box = shapely.box (left, bot, left+dx, bot+dy)
             if shapely.intersects(l,box):
                 z[row_idx][col_idx]= z[row_idx][col_idx] +1
+    return z
 
 
 
@@ -43,13 +52,41 @@ def determine_congestion (a_db):
 
 
 
+def make_data (a_db, z):
+    cfg = config.Config()
+    ds = cfg.get_pin_ds()
+    box = a_db.die.rect
 
+    X = np.arange(box.left(), box.right(), ds)
+    Y = np.arange(box.bottom(), box.top(), ds)
+    X,Y = np.meshgrid(X,Y)
+    fun(X,Y, z)
+    return X,Y,z
 
-a_db, drawing = generator.lattice_generator(1)
-z = determine_congestion(a_db)
-generator.draw_db(drawing, a_db)
+def function(x, y):
+    return np.sin(np.sqrt(x ** 2 + y ** 2))
+
+a_db, drawing = generator.lattice_generator(9)
+g.draw_db(drawing, a_db)
 drawing.save_svg("foo.svg")
-print (z)
+z = determine_congestion(a_db)
+
+X,Y,Z = make_data (a_db, z)
+#Z = function (X,Y)
+
+fig = plt.figure(figsize=(10,8))
+ax = plt.axes(projection='3d')
+
+ax.plot_surface(X, Y, Z, cmap='cool', alpha=0.8)
+
+ax.set_title('3D Contour Plot of Congestion', fontsize=14)
+ax.set_xlabel('x', fontsize=12)
+ax.set_ylabel('y', fontsize=12)
+ax.set_zlabel('congestion', fontsize=12)
+plt.show()
+
+print ("done")
+
 
 
 

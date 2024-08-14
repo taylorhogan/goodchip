@@ -1,12 +1,12 @@
 class Config:
     def __init__(self) -> None:
         self.params = {
-            "max_components": 100,
+            "max_components": 144,
             "num_designs": 10,
             "component_ds": 32,
             "pin_ds": 8,
-            "same_design_size": False,
-            "random_changes": True
+            "same_design_size": True,
+            "random_changes": False
 
         }
 
