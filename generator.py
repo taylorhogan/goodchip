@@ -72,17 +72,18 @@ def draw_component(display, component) -> None:
 
 def draw_net(display, a_db) -> None:
     for c in a_db.connections:
-        a_line = draw.Line(c.line.xy[0][0], c.line.xy[1][0], c.line.xy[0][1], c.line.xy[1][1], stroke='black',
+        a_line = draw.Line(c.line.xy[0][0], c.line.xy[1][0], c.line.xy[0][1], c.line.xy[1][1], stroke=cfg.get_connection_color(),
                            stroke_width=1)
         display.append(a_line)
 
 
 def draw_db(display, a_db) -> None:
     r = a_db.die.rect
-    outline = draw.Rectangle(r.ll.x, r.ll.y, r.width(), r.height(), fill='blue')
+    outline = draw.Rectangle(r.ll.x, r.ll.y, r.width(), r.height(), fill=cfg.get_background_color())
     display.append(outline)
-    for c in a_db.devices:
-        draw_component(display, c)
+    if not cfg.get_just_connections():
+        for c in a_db.devices:
+            draw_component(display, c)
     draw_net(display, a_db)
 
 

@@ -3,10 +3,14 @@ class Config:
         self.params = {
             "max_components": 100,
             "num_designs": 10,
-            "component_ds": 32,
-            "pin_ds": 8,
-            "same_design_size": False,
-            "random_changes": True
+            "component_ds": 8,
+            "pin_ds": 2,
+            "same_design_size": True,
+            "random_changes": False,
+            "just_connections": True,
+            "connection_color": "red",
+            "background_color": "white"
+
 
         }
 
@@ -27,3 +31,9 @@ class Config:
 
     def get_random_changes(self) -> bool:
         return self.params["random_changes"]
+    def get_just_connections(self) -> bool:
+        return self.params["just_connections"]
+    def get_connection_color(self) -> str:
+        return self.params["connection_color"]
+    def get_background_color(self) -> str:
+        return self.params["background_color"]
