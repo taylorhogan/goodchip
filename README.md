@@ -10,7 +10,14 @@ One of the metrics leading to a "good chip" is to reduce the number of crossings
 alignment, and distributed connection density. 
 One of the characteristics of Electronic Design Automation (EDA) that makes it ripe for ML is that it is a virtual world. 
 We don't have to harvest X-Rays, or go around the world taking pictures of road signs. We can create them!
-
+# Motivation for ML
+EDA software as well as most engineering software is dominated by single thread execution. Past computational thinking, indeed the foundation of modern computer science curriculums
+is just countless examples of non-parallel programming. Determining the number of crossings of n lines is at best O(n LOG n) in time complexity. Most naive algorithms are O(n**2). The 
+beauty of neural nets is that evaluation (inference) is constant time, and on a GPU its 100s per second, independent of the size of n. Why is this important. Almost all automation
+algorithms need a goal or fitness function. Independent of the method of searching the solution space, these algorithms need to test a solution. This testing is always the limiting factor in
+speed, thus the limiting factor is finding a good solution. A human does not count the crossings or calculate the congestion, he/she will look at it and can make a good decision very fast. This
+is exactly what the neural net is doing, but with much greater speed and accuracy compared to the human. Yes moving the problem to the GPU is expensive. But so many fitness functions can be run 
+in parallel, think crossings, congestion, alignment. These can all be done at the same time. Even greater advantages can be realized if the entire optimization algorithm is moved to the GPU.
 ## Training Data Repository
 This directory contains two sets of a data. Once the generator has been run, they will appear.
 - A collection of images that show a set of components, pins and connections.  The best chips have fewer crossing connections. 
