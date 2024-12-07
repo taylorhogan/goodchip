@@ -50,6 +50,8 @@ python3 generator.py
 The config.py file contains a few ways to change the morphology of the training data. This will certainly expand in the future. 
 The drawing styles, such as the absence of certain layers would be nice.
 ## Code Flow
+### The flow is basically Generation->Training->Inference
+
 - There is a exist a simple EDA data base. A veneer of effort was made to insure the physical properies mimic
 lef/def and the hierarchy mimics verilog
 - The generation includes building sample data bases each with different morphology. 
