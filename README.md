@@ -49,6 +49,17 @@ python3 generator.py
 ## How to change the style/morphology of the training data
 The config.py file contains a few ways to change the morphology of the training data. This will certainly expand in the future. 
 The drawing styles, such as the absence of certain layers would be nice.
+## Code Flow
+- There is a exist a simple EDA data base. A veneer of effort was made to insure the physical properies mimic
+lef/def and the hierarchy mimics verilog
+- The generation includes building sample data bases each with different morphology. 
+- Each data base is turned into a picture
+- Each data base is used to generate ground truth "goodness"
+- images are classified as being good or bad and moved into respective folders, along with a .csv file correlatig
+the goodness along with the name of the file.
+- This data is used to train the CNN
+- You can individually test pictures through the eval_model.py method
+
 ## Future Developments
 Feel free to keep up to date on this repo. Or better yet submit a pull request for Currently all devices are of the same instance. 
 This should change to exhibit more diversity. 
@@ -56,7 +67,5 @@ This should change to exhibit more diversity.
 
 [Best book on Deep Learning (IMO)](https://www.amazon.com/Learning-Python-Second-Fran%C3%A7ois-Chollet/dp/1617296864/ref=sr_1_1?crid=1JOCH8GC3NCAM&dib=eyJ2IjoiMSJ9.I8xJfgtsdFfwp_oX6p4AHEI1N5ypW4-XfJl33s7tIpOpCFwLdHbdEFx5-ni-TQ2dDDahNUMrlgRZeEO2O-qDwSzIRJs2GQJ8n0cQhlsjrcvsiHDChJDI9NqQG6wYKNo8B-tSovIcPF0J3niNWttbnPTCm-U9VPJtEf_QMhfX7PAw-kna04eUKWUJE0GttxL5VUxvXZ9ZrVZfVHLtCAE6EutgyM3QkJ2TIgUZ5HD2lvI.76LRNexk_WwbNfvoJk_gTTjHgzdXs8_duAcEBmfEn4c&dib_tag=se&keywords=francois+chollet&qid=1723382182&sprefix=francois+ch%2Caps%2C133&sr=8-1)
 
-## Generator Code Repo
-Sorry for the sparsity of comments. The small DB is a very lightweight version of Verilog and .lef/.def 
 
 
