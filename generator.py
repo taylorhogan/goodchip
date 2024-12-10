@@ -8,6 +8,8 @@ import numpy as np
 import config
 import db
 import geom as g
+import shutil
+import subprocess
 
 cfg = config.Config()
 
@@ -72,7 +74,8 @@ def draw_component(display, component) -> None:
 
 def draw_net(display, a_db) -> None:
     for c in a_db.connections:
-        a_line = draw.Line(c.line.xy[0][0], c.line.xy[1][0], c.line.xy[0][1], c.line.xy[1][1], stroke=cfg.get_connection_color(),
+        a_line = draw.Line(c.line.xy[0][0], c.line.xy[1][0], c.line.xy[0][1], c.line.xy[1][1],
+                           stroke=cfg.get_connection_color(),
                            stroke_width=1)
         display.append(a_line)
 
@@ -131,7 +134,12 @@ def lattice_generator(design_idx) -> (db.DB, draw.Drawing):
         if cfg.get_random_changes():
             num_permutes = random.randint(0, num_components)
         else:
-            num_permutes = design_idx
+            # c
+            r = random.random()
+            if r < 0.5:
+                num_permutes = 0
+            else:
+                num_permutes = random.randint(0, num_components)
 
         for permute_idx in range(num_permutes):
             seq = swap_contents(seq)
@@ -226,11 +234,34 @@ def create_test_cases():
     os.chdir("generated_images")
     for design_idx in range(num_designs):
         a_db, drawing = lattice_generator(design_idx)
-        filename = 't' + str(design_idx) + '.svg'
+        svg_path = 't' + str(design_idx) + '.svg'
         draw_db(drawing, a_db)
-        drawing.save_svg(filename)
+        drawing.save_svg(svg_path)
+
         score = determine_score(a_db)
-        labels.append(Label(filename, score))
+
+        # determine label (good or bad)
+        if score < 0.5:
+            label_folder = 'good'
+        else:
+            label_folder = 'bad'
+
+        # check if the target directory exists
+        target_dir = f"{label_folder}"
+        if not os.path.exists(target_dir):
+            os.makedirs(target_dir)
+
+        # move file
+        dst = f"{target_dir}/{svg_path}"
+        shutil.move(svg_path, dst)
+
+        if cfg.get_make_png_images():
+            png_path = dst.replace('.svg', '.png')
+            arg1 = dst
+            arg2 = "--export-filename=" + png_path
+            subprocess.run(["inkscape", arg1, arg2])
+
+        labels.append(Label(dst, score))
 
     create_label_files(labels)
     print("Created " + str(num_designs) + " training images")
