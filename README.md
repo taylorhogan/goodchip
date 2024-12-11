@@ -53,6 +53,9 @@ The drawing styles, such as the absence of certain layers would be nice.
 python3 train_model.py
 
 ![congestion_image](html_images/gen_train.png)
+I suspect the excellent inference is due to the idea that validation images are also in the training set. I will work to
+change this and run more tests.
+
 ## Code Flow
 ### The flow is basically Generation->Training->Inference
 
